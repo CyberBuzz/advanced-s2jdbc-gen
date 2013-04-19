@@ -14,6 +14,14 @@
     <github.global.server>github</github.global.server>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>maven.seasar.org</id>
+      <name>The Seasar Foundation Maven2 Repository</name>
+      <url>http://maven.seasar.org/maven2</url>
+    </repository>
+  </repositories>
+
   <!-- Repository -->
   <distributionManagement>
     <repository>
@@ -22,6 +30,8 @@
       <url>file://${basedir}/build</url>
     </repository>
   </distributionManagement>
+
+
 
   <build>
     <plugins>
