@@ -1,15 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>me.stormcat.maven.plugin</groupId>
-  <artifactId>advanced-s2jdbc-gen-lib</artifactId>
+  <groupId>advanced-s2jdbc-gen</groupId>
+  <artifactId>advanced-s2jdbc-gen</artifactId>
+  <name>advanced-s2jdbc-gen</name>
   <version>0.1.2</version>
   <packaging>jar</packaging>
 
+  <!-- Properties -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.version>0.1.2</project.version>
+    <github.global.server>github</github.global.server>
   </properties>
 
+  <!-- Repository -->
   <repositories>
     <repository>
       <id>maven.seasar.org</id>
@@ -18,34 +23,42 @@
     </repository>
   </repositories>
 
+  <!-- Repository -->
+  <distributionManagement>
+    <repository>
+      <id>internal.repo</id>
+      <name>Temporary Staging Repository</name>
+      <url>file://${basedir}/build</url>
+    </repository>
+  </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-plugin-plugin</artifactId>
-        <version>2.5.1</version>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.7</version>
         <configuration>
-          <goalPrefix>advanced-s2jdbc-gen</goalPrefix>
+          <!-- jarファイルをディプロイする時のコミットメッセージ -->
+          <message>Maven artifacts for ${project.version}</message>
+          <!-- Jekyllという静的ページを生成するツールは無効 -->
+          <noJekyll>true</noJekyll>
+          <outputDirectory>${basedir}/build</outputDirectory>
+          <!-- Mavenリポジトリにするリモートのブランチ名 -->
+          <branch>refs/heads/mvn-repo</branch>
+          <includes>
+            <include>**/*</include>
+          </includes>
+          <repositoryName>advanced-s2jdbc-gen</repositoryName>
+          <repositoryOwner>CyberBuzz</repositoryOwner>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
-            <phase>install</phase>
             <goals>
-              <goal>jar</goal>
+              <goal>site</goal>
             </goals>
-          </execution>
+            <phase>deploy</phase>
+           </execution>
         </executions>
       </plugin>
     </plugins>
