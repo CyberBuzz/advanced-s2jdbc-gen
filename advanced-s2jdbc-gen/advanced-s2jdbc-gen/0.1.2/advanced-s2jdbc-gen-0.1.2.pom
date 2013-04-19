@@ -5,7 +5,7 @@
   <artifactId>advanced-s2jdbc-gen</artifactId>
   <name>advanced-s2jdbc-gen</name>
   <version>0.1.2</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <!-- Properties -->
   <properties>
@@ -14,6 +14,7 @@
     <github.global.server>github</github.global.server>
   </properties>
 
+  <!-- Repository -->
   <repositories>
     <repository>
       <id>maven.seasar.org</id>
@@ -22,7 +23,6 @@
     </repository>
   </repositories>
 
-  <!-- Repository -->
   <distributionManagement>
     <repository>
       <id>internal.repo</id>
@@ -30,8 +30,6 @@
       <url>file://${basedir}/build</url>
     </repository>
   </distributionManagement>
-
-
 
   <build>
     <plugins>
